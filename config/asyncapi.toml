@@ -1,0 +1,16 @@
+[base_command]
+name = "asyncapi"
+short = "short description of build"
+long = "long description of build"
+
+[[base_command.flag]]
+name = "input"
+shorthand = "i"
+default_val = ""
+usage = "This is a mandatory input. The listener will be generated according to the given AsyncAPI contract."
+
+[[base_command.flag]]
+name = "output"
+shorthand = "o"
+default_val = ""
+usage = "Location of the generated Ballerina source code."

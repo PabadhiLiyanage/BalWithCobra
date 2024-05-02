@@ -1,0 +1,52 @@
+[base_command]
+name = "tool"
+short = "Extend the Ballerina CLI with custom commands"
+long = "This command allows you to extend the Ballerina CLI with custom commands."
+
+[[base_command.subcommand]]
+name = "pull"
+short = "Pull a tool from the Ballerina Central"
+description = "Pull a tool from the Ballerina Central to use in your local environment."
+
+[[base_command.subcommand]]
+name = "remove"
+short = "Remove a tool from the local environment."
+description = "Remove a tool from the local environment."
+
+[[base_command.subcommand]]
+name = "update"
+short = "Update a tool to the latest version compatible with the current distribution."
+description = "Update a tool to the latest version compatible with the current distribution."
+
+[[base_command.subcommand]]
+name = "use"
+short = "Set a tool version as the active version."
+description = "Set a tool version as the active version."
+
+[[base_command.subcommand]]
+name = "list"
+short = "List all tools available in the local environment."
+description = "List all tools available in the local environment."
+
+[[base_command.subcommand]]
+name = "search"
+short = "Search the Ballerina Central for tools"
+description = "Search the Ballerina Central for tools."
+
+[[base_command.subcommand_flag]]
+command = "pull"
+name = "repository"
+default_val = ""
+usage = "Pull a tool from a custom repository."
+
+[[base_command.subcommand_flag]]
+command = "remove"
+name = "repository"
+default_val = ""
+usage = "Remove a tool from a custom repository."
+
+[[base_command.subcommand_flag]]
+command = "use"
+name = "repository"
+default_val = ""
+usage = "Use a tool from a custom repository."

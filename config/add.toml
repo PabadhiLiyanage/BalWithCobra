@@ -1,0 +1,4 @@
+[base_command]
+name = "add"
+short = "short description of add"
+long = "long description of add"

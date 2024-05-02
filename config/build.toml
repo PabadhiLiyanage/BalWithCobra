@@ -1,0 +1,58 @@
+[base_command]
+name = "build"
+short = "short description of build"
+long = "long description of build"
+
+[base_command.help]
+
+
+[[base_command.flag]]
+name = "output"
+shorthand = "o"
+default_val = ""
+usage = "Write the output to the given file."
+
+[[base_command.flag]]
+name = "offline"
+default_val = false
+usage = "Run in offline mode"
+
+[[base_command.flag]]
+name = "observability-included"
+default_val = false
+usage = "Run with including observability"
+
+[[base_command.flag]]
+name = "sticky"
+default_val = false
+usage = "Run with including sticky"
+
+[[base_command.flag]]
+name = "target-dir"
+default_val = ""
+usage = "Specify the target directory"
+
+[[base_command.flag]]
+name = "export-openapi"
+default_val = false
+usage = "Export OpenAPI specification"
+
+[[base_command.flag]]
+name = "list-conflicted-classes"
+default_val = false
+usage = "List conflicted classes"
+
+[[base_command.flag]]
+name = "graalvm"
+default_val = false
+usage = "Use GraalVM"
+
+[[base_command.flag]]
+name = "graalvm-build-options"
+default_val = ""
+usage = "Specify GraalVM build options"
+
+[[base_command.flag]]
+name = "cloud"
+default_val = ""
+usage = "Specify the cloud provider"
