@@ -1,7 +1,10 @@
 package cmd
 
 import (
+	"ball/generate"
 	"fmt"
+	"os"
+	"path/filepath"
 
 	"github.com/spf13/cobra"
 )
@@ -35,6 +38,12 @@ var pullToolCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("pull called")
 		executeBallerinaCommand()
+		filePath := generate.FindPathForJson(os.Args[2])
+		if _, err := os.Stat(filePath); err == nil {
+			fmt.Println("File exists.")
+			fmt.Println(filePath)
+			generate.GeneratingCLICmd("/home/wso2/BalWithCobra/config/health.json")
+		}
 	},
 }
 
@@ -44,6 +53,9 @@ var removeCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("remove called")
 		executeBallerinaCommand()
+		filepath := filepath.Join("cmd", os.Args[3]+".go")
+		fmt.Print(filepath)
+		_ = removeFileIfExists(filepath)
 	},
 }
 
@@ -81,4 +93,14 @@ var searchToolCmd = &cobra.Command{
 		fmt.Println("search called")
 		executeBallerinaCommand()
 	},
+}
+
+func removeFileIfExists(filePath string) error {
+	if _, err := os.Stat(filePath); err == nil {
+		if err := os.Remove(filePath); err != nil {
+			return err
+		}
+		fmt.Println("File deleted successfully.")
+	}
+	return nil
 }

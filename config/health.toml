@@ -1,0 +1,30 @@
+[base_command]
+name = "health"
+short = "short description of health"
+long = "long description of health"
+
+[base_command.help]
+
+
+[[base_command.flag]]
+name = "output"
+shorthand = "o"
+default_val = ""
+usage = "Location of the generated Ballerina artifacts."
+
+[[base_command.flag]]
+name = "mode"
+shorthand = "m"
+default_val = ""
+usage = " Mode can be 'package' or 'template'."
+
+[[base_command.flag]]
+name = "package-name"
+default_val = ""
+usage = "Only applicable in ‘package’ mode."
+
+[[base_command.flag]]
+name = "dependent-package"
+default_val = ""
+usage = "Only applicable in ‘template’ mode."
+

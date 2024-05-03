@@ -11,13 +11,10 @@ import (
 func main() {
 	cmd.Execute()
 	subCommands := make([]string, 0)
-
-	// Append subcommands to the slice
 	for _, cmd := range cmd.RootCmd.Commands() {
 		subCommands = append(subCommands, cmd.Use)
 	}
-
-	// Print the subcommand list
 	fmt.Println("Subcommands appended to the slice:")
 	fmt.Println(subCommands)
+	//generate.GeneratingCLICmd("/home/wso2/BalWithCobra/config/health.json")
 }
