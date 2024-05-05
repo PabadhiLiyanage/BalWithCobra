@@ -5,16 +5,15 @@ package main
 
 import (
 	"ball/cmd"
-	"fmt"
 )
 
 func main() {
 	cmd.Execute()
-	subCommands := make([]string, 0)
-	for _, cmd := range cmd.RootCmd.Commands() {
-		subCommands = append(subCommands, cmd.Use)
-	}
-	fmt.Println("Subcommands appended to the slice:")
-	fmt.Println(subCommands)
+	// subCommands := make([]string, 0)
+	// for _, cmd := range cmd.RootCmd.Commands() {
+	// 	subCommands = append(subCommands, cmd.Use)
+	// }
+	// fmt.Println("Subcommands appended to the slice:")
+	// fmt.Println(subCommands)
 	//generate.GeneratingCLICmd("/home/wso2/BalWithCobra/config/health.json")
 }

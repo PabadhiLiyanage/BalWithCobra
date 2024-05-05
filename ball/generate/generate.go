@@ -26,6 +26,15 @@ type FlagConfig struct {
 	DefaultVal interface{}
 }
 
+type ToolData struct {
+	Id         string
+	Org        string
+	Name       string
+	Active     bool
+	Version    string
+	Repocitory string
+}
+
 func GenerateFlagLine(flag FlagConfig, cmdName string) string {
 	if cmdName == "" {
 		cmdName = "RootCmd"
@@ -229,32 +238,27 @@ func init() {
 	}
 }
 
-// /home/wso2/.ballerina/repositories/central.ballerina.io/bala/ballerinax/health/2.1.1/java17/tool/bal-tool.json
-// /home/wso2/.ballerina/.config/bal-tools.toml
-
-type ToolData struct {
-	Id         string
-	Org        string
-	Name       string
-	Version    string
-	Active     bool
-	Repocitory string
-}
-
 func FindPathForJson(toolName string) string {
 	jasonPath := ""
-	currentUser, err := user.Current()
-	if err != nil {
-		fmt.Println("Error:", err)
-	}
+	currentUser, _ := user.Current()
 	balToolPath := filepath.Join(currentUser.HomeDir, ".ballerina", ".config")
+	fmt.Println("Configuration path:", balToolPath)
+
 	viper.SetConfigName("bal-tools")
 	viper.AddConfigPath(balToolPath)
 	viper.SetConfigType("toml")
-	toolDetails, _ := viper.Get("tool").([]interface{})
+
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Println("Error reading config file:", err)
+	}
+
+	toolDetails, ok := viper.Get("tool").([]interface{})
+	if !ok {
+		fmt.Println("Error reading tool details from config")
+	}
 	for _, table := range toolDetails {
 		if m, ok := table.(map[string]interface{}); ok {
-			if cast.ToString(m["name"]) == toolName && cast.ToBool(m["active"]) {
+			if cast.ToString(m["id"]) == toolName && cast.ToBool(m["active"]) {
 				toolData := ToolData{
 					Id:         cast.ToString(m["id"]),
 					Org:        cast.ToString(m["org"]),
@@ -272,15 +276,19 @@ func FindPathForJson(toolName string) string {
 				jasonPath = filepath.Join(currentUser.HomeDir, ".ballerina", "repositories", repocitoryType, "bala", toolData.Org, toolData.Name, toolData.Version, "java17", "tool", "bal-tool.json")
 				break
 			}
-
 		}
 	}
+
+	if jasonPath == "" {
+		fmt.Println("Tool not found or not active in config")
+	}
+
 	return jasonPath
 }
 
 func GeneratingCLICmd(path string) {
 
-	viper.SetConfigType("json") // Set the config type to JSON
+	viper.SetConfigType("json")
 	viper.SetConfigFile(path)
 
 	if err := viper.ReadInConfig(); err != nil {

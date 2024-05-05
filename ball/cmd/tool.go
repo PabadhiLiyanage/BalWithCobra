@@ -38,7 +38,8 @@ var pullToolCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("pull called")
 		executeBallerinaCommand()
-		filePath := generate.FindPathForJson(os.Args[2])
+		filePath := generate.FindPathForJson(os.Args[3])
+		fmt.Println(filePath)
 		if _, err := os.Stat(filePath); err == nil {
 			fmt.Println("File exists.")
 			fmt.Println(filePath)
@@ -65,6 +66,13 @@ var updateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("update called")
 		executeBallerinaCommand()
+		filePath := generate.FindPathForJson(os.Args[3])
+		fmt.Println(filePath)
+		if _, err := os.Stat(filePath); err == nil {
+			fmt.Println("File exists.")
+			fmt.Println(filePath)
+			generate.GeneratingCLICmd("/home/wso2/BalWithCobra/config/health.json")
+		}
 	},
 }
 
@@ -74,6 +82,13 @@ var useCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("use called")
 		executeBallerinaCommand()
+		filePath := generate.FindPathForJson(os.Args[3])
+		fmt.Println(filePath)
+		if _, err := os.Stat(filePath); err == nil {
+			fmt.Println("File exists.")
+			fmt.Println(filePath)
+			generate.GeneratingCLICmd("/home/wso2/BalWithCobra/config/health.json")
+		}
 	},
 }
 
